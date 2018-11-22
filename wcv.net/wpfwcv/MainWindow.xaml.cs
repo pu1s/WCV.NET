@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using libwcvnet;
+using wcvlib;
 
 namespace wpfwcv
 {
@@ -21,6 +21,7 @@ namespace wpfwcv
     /// </summary>
     public partial class MainWindow : Window
     {
+        public wcvlib.ClipboardViewerForm f;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace wpfwcv
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ClipboardViewerForm f = new ClipboardViewerForm();
+            f = new ClipboardViewerForm();
+            f.Show();
         }
     }
 }
