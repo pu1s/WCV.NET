@@ -18,7 +18,6 @@ using namespace System::Reflection;
 
 namespace wcvlib
 {
-	
 	public ref class TypeConverter
 	{
 	public:
@@ -34,11 +33,11 @@ namespace wcvlib
 		}
 		//
 		template<typename UType, typename MType>
-		static UType* ToUnmanaged(MType% mt){}
+		static UType ToUnmanaged(MType mt){}
 		template<>
-		static UHANDLE* ToUnmanaged(MHANDLE% mt)
+		static UHANDLE ToUnmanaged(MHANDLE% mt)
 		{
-			return (UHANDLE*)mt.ToPointer();
+			return (UHANDLE)mt.ToPointer();
 		}
 		//
 		template<typename MType, typename UType>
@@ -49,5 +48,16 @@ namespace wcvlib
 			return MHANDLE(ut);
 		}
 		//
+		static MMSG ToManagedMessage(const UMSG& umsg)
+		{
+			MMSG tmp;
+			tmp.Create(MHANDLE(umsg.hwnd), System::Int32(umsg.message), System::IntPtr((long)umsg.wParam), System::IntPtr(umsg.lParam));
+			return tmp;
+		}
+		static UMSG ToUnmanagedMessage(MMSG% const mmsg)
+		{
+			UMSG tmp;
+			tmp.hwnd = (HWND)mmsg.HWnd.ToPointer(); //TODO: to be cont
+		}
 	};
 }
