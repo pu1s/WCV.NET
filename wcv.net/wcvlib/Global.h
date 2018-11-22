@@ -32,13 +32,22 @@ namespace wcvlib
 		static UHANDLE Convert<UHANDLE, MHANDLE>(MHANDLE h) {
 			return (UHANDLE)h.ToPointer();
 		}
+		//
 		template<typename UType, typename MType>
 		static UType* ToUnmanaged(MType% mt){}
-
 		template<>
-		static UHANDLE* ToUnmanaged(MMSG% mt)
+		static UHANDLE* ToUnmanaged(MHANDLE% mt)
 		{
-
+			return (UHANDLE*)mt.ToPointer();
 		}
+		//
+		template<typename MType, typename UType>
+		static MType ToManaged(UType& ut) {}
+		template<>
+		static MHANDLE ToManaged(UHANDLE& ut)
+		{
+			return MHANDLE(ut);
+		}
+		//
 	};
 }
