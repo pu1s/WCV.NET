@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using wcvlib;
 
 namespace wpfwcv
@@ -22,6 +9,9 @@ namespace wpfwcv
     public partial class MainWindow : Window
     {
         public wcvlib.ClipboardViewerForm f;
+        //public wcvlib.ClipboardViewerForm f1;
+        //public wcvlib.ClipboardViewerForm f2;
+        //public wcvlib.ClipboardViewerForm f3;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +21,12 @@ namespace wpfwcv
         {
             f = new ClipboardViewerForm();
             f.Show();
+            //f1 = new ClipboardViewerForm();f1.Show();
+
+            //f2 = new ClipboardViewerForm(); f2.Show();
+
+            //f3 = new ClipboardViewerForm(); f3.Show();
+
         }
     }
 }

@@ -15,26 +15,31 @@ using namespace System::Reflection;
 #define MMSG	System::Windows::Forms::Message
 #define UMSG	MSG
 
+#define ToUM(x) TypeConverter::ConvertMessage<UMSG, MMSG%>(x)
+#define ToMM(x) TypeConverter::ConvertMessage<MMSG, UMSG&>(x)
+#define ToMH(x) TypeConverter::ConvertHandle<MHANDLE, UHANDLE&>(x)
+#define ToUH(x) TypeConverter::ConvertHandle<UHANDLE, MHANDLE%>(x)
+
 namespace wcvlib
-{
+{	
 	public ref class TypeConverter
 	{
 	public:
 		template<typename To, typename From>
-		static To ConvertHandle(From){}
-		
+		static To ConvertHandle(From) {}
+
 		template<>
 		static MHANDLE ConvertHandle<MHANDLE, UHANDLE&>(UHANDLE& h) {
 			return System::IntPtr(h);
 		}
-		
+
 		template<>
 		static UHANDLE ConvertHandle<UHANDLE, MHANDLE%>(MHANDLE% h) {
 			return (UHANDLE)h.ToPointer();
 		}
-		
+
 		template<typename To, typename From>
-		static To ConvertMessage(From){}
+		static To ConvertMessage(From) {}
 
 		template<>
 		static MMSG ConvertMessage<MMSG, UMSG&>(UMSG& um)
@@ -48,11 +53,9 @@ namespace wcvlib
 		static UMSG ConvertMessage(MMSG% mm)
 		{
 			UMSG um;
-			um.hwnd = (HWND)mm.HWnd.ToPointer(); 
+			um.hwnd = (HWND)mm.HWnd.ToPointer();
 			return um;
 		}
 	};
-
-	
 }
 

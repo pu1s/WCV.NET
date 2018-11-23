@@ -16,7 +16,7 @@ using namespace System::Reflection;
 
 namespace wcvlib
 {
-	public value struct CrossHandle
+	public value struct UniHandle
 	{
 		HWND unmanaged_handle;
 		IntPtr managed_handle;
@@ -24,6 +24,9 @@ namespace wcvlib
 	public ref class ClipboardViewerForm :
 		public System::Windows::Forms::Form
 	{
+	private:
+		//UniHandle _uniHandle;
+		//void CrossHandleUpdate(void);
 	public:
 		ClipboardViewerForm();
 	protected:

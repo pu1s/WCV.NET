@@ -12,12 +12,15 @@ void wcvlib::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 	UMSG um;
 	MHANDLE mh;
 	
-	um = TypeConverter::ConvertMessage<UMSG, MMSG%>(m);
+	um = ToUM(m);
 	switch (m.Msg)
 	{
+	/*case WM_NCCREATE:
+
+		break;*/
 	case WM_CREATE:
 		h = (UHANDLE)SetClipboardViewer(um.hwnd);
-		mh = TypeConverter::ConvertHandle<MHANDLE, UHANDLE&>(h);
+		mh = ToMH(h);
 		this->Text = this->Handle.ToString() + ":" + mh.ToString();
 		break;
 	default:
