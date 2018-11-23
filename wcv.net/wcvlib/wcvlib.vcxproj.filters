@@ -27,7 +27,7 @@
     <ClInclude Include="ClipboardViewerForm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h">
+    <ClInclude Include="TypeConverter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

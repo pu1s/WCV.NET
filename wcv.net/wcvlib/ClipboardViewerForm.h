@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <WinUser.h>
 
+#include "TypeConverter.h"
+
 //#pragma comment(lib, "user32.dll")
 
 #using <system.dll>
@@ -14,6 +16,11 @@ using namespace System::Reflection;
 
 namespace wcvlib
 {
+	public value struct CrossHandle
+	{
+		HWND unmanaged_handle;
+		IntPtr managed_handle;
+	};
 	public ref class ClipboardViewerForm :
 		public System::Windows::Forms::Form
 	{
