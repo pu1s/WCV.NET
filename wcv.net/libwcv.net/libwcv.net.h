@@ -10,7 +10,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-
+extern int d = 10;
 
 namespace libwcvnet
 {
