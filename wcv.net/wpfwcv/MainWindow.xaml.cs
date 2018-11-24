@@ -19,8 +19,12 @@ namespace wpfwcv
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            f = new ClipboardViewerForm();
-            f.Show();
+            //for(int i = 0; i<10; i++)
+            //{
+                f = new ClipboardViewerForm();
+                f.Show();
+            //}
+           
             //f1 = new ClipboardViewerForm();f1.Show();
 
             //f2 = new ClipboardViewerForm(); f2.Show();
