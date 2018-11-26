@@ -27,7 +27,7 @@ namespace wfwcv
             wcvlib.UniHandle uniHandle = new UniHandle(ref h);
             f.Show();
             var hh = Handle;
-            uniHandle = uniHandle.Create(ref hh);
+            //uniHandle = uniHandle.Create(ref hh);
            
             button1.Text = uniHandle.ToString();
         }
