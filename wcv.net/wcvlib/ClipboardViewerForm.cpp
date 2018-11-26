@@ -28,3 +28,14 @@ void wcvlib::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 		break;
 	}
 }
+
+wcvlib::UniHandle::UniHandle(const HWND &, const IntPtr %)
+{
+	throw gcnew System::NotImplementedException();
+}
+
+System::String ^ wcvlib::UniHandle::ToString()
+{
+	throw gcnew System::NotImplementedException();
+	// TODO: вставьте здесь оператор return
+}

@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <WinUser.h>
+#include <iostream>
+#include <string>
 
 #include "TypeConverter.h"
 
@@ -18,8 +20,11 @@ namespace wcvlib
 {
 	public value struct UniHandle
 	{
+	public:
 		HWND unmanaged_handle;
 		IntPtr managed_handle;
+		UniHandle(const HWND&, const IntPtr%);
+		System::String^ ToString() override;
 	};
 	public ref class ClipboardViewerForm :
 		public System::Windows::Forms::Form
