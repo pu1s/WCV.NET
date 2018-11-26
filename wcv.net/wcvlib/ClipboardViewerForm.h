@@ -20,20 +20,48 @@ namespace wcvlib
 {
 	public value struct UniHandle
 	{
+	private:
+		UHANDLE UnmanagedHandle;
+		MHANDLE ManagedHandle;
 	public:
-		HWND unmanaged_handle;
-		IntPtr managed_handle;
-		UniHandle(const HWND&, const IntPtr%);
+		static UniHandle Empty;
 		System::String^ ToString() override;
+		UniHandle(UHANDLE& handle)
+		{
+			UnmanagedHandle = handle;
+			ManagedHandle = ToMH(handle);
+		}
+		UniHandle(MHANDLE% handle)
+		{
+			UnmanagedHandle = ToUH(handle);
+			ManagedHandle = handle;
+		}
+		UniHandle Create(UHANDLE& handle)
+		{
+			this->UnmanagedHandle = handle;
+			this->ManagedHandle = ToMH(handle);
+			return *this;
+		}
+		UniHandle Create(MHANDLE% handle)
+		{
+			this->UnmanagedHandle = ToUH(handle);
+			this->ManagedHandle = handle;
+			return *this;
+		}
 	};
+
+	
+
 	public ref class ClipboardViewerForm :
 		public System::Windows::Forms::Form
 	{
 	private:
-		//UniHandle _uniHandle;
+		
 		//void CrossHandleUpdate(void);
 	public:
 		ClipboardViewerForm();
+		UniHandle pUniHandle;
+		
 	protected:
 		void WndProc(System::Windows::Forms::Message% m) override;
 	};
