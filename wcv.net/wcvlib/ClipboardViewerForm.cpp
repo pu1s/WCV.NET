@@ -2,12 +2,12 @@
 #include "ClipboardViewerForm.h"
 
 
-stdcli::ClipboardViewerForm::ClipboardViewerForm()
+wcvlib::ClipboardViewerForm::ClipboardViewerForm()
 {
 
 }
 
-void stdcli::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
+void wcvlib::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 {
 	UHANDLE h;
 	UMSG um;
@@ -33,27 +33,3 @@ void stdcli::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 	}
 }
 
-
-wcvlib::UniHandle::UniHandle()
-{
-	this->m_managed_Handle = IntPtr::Zero;
-	this->m_unmanaged_Handle = NULL;
-}
-
-wcvlib::UniHandle::UniHandle(wcvlib::UniHandle% unihandle)
-{
-	this->m_managed_Handle = unihandle.m_managed_Handle;
-	this->m_unmanaged_Handle = unihandle.m_unmanaged_Handle;
-}
-
-
-System::String ^ stdcli::UniHandle::ToString()
-{
-	System::String^ tmp = gcnew System::String("");
-	tmp += "Unmanaged Handle: ";
-	tmp += gcnew String(std::to_string((long long)m_unmanaged_Handle).c_str());
-	tmp += " ";
-	tmp += "Managed Handle: ";
-	tmp += m_managed_Handle.ToString();
-	return tmp;
-}

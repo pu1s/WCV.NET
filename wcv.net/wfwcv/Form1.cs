@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using wcvlib;
+using stdcli;
 
 namespace wfwcv
 {
@@ -24,7 +25,7 @@ namespace wfwcv
             //wcvlib.UniHandle uh;
             f = new ClipboardViewerForm();
             IntPtr h = IntPtr.Zero;
-            wcvlib.UniHandle uniHandle = new UniHandle(ref h);
+            stdcli.UniHandle uniHandle = new stdcli.UniHandle(ref h);
             f.Show();
             var hh = Handle;
             //uniHandle = uniHandle.Create(ref hh);
