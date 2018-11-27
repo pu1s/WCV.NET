@@ -2,12 +2,12 @@
 #include "ClipboardViewerForm.h"
 
 
-wcvlib::ClipboardViewerForm::ClipboardViewerForm()
+stdcli::ClipboardViewerForm::ClipboardViewerForm()
 {
 	
 }
 
-void wcvlib::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
+void stdcli::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 {
 	UHANDLE h;
 	UMSG um;
@@ -37,7 +37,7 @@ void wcvlib::ClipboardViewerForm::WndProc(System::Windows::Forms::Message % m)
 
 
 
-System::String ^ wcvlib::UniHandle::ToString()
+System::String ^ stdcli::UniHandle::ToString()
 {
 	System::String^ tmp = gcnew System::String("");
 	tmp += "Unmanaged Handle: ";

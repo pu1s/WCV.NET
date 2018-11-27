@@ -10,6 +10,6 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Reflection;
 
-namespace wcvlib {
+namespace stdcli {
 	
 }

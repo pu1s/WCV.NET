@@ -15,12 +15,12 @@ using namespace System::Reflection;
 #define MMSG	System::Windows::Forms::Message
 #define UMSG	MSG
 
-#define ToUM(x) wcvlib::TypeConverter::ConvertMessage<UMSG, MMSG%>(x)
-#define ToMM(x) wcvlib::TypeConverter::ConvertMessage<MMSG, UMSG&>(x)
-#define ToMH(x) wcvlib::TypeConverter::ConvertHandle<MHANDLE, UHANDLE&>(x)
-#define ToUH(x) wcvlib::TypeConverter::ConvertHandle<UHANDLE, MHANDLE%>(x)
+#define ToUM(x) stdcli::TypeConverter::ConvertMessage<UMSG, MMSG%>(x)
+#define ToMM(x) stdcli::TypeConverter::ConvertMessage<MMSG, UMSG&>(x)
+#define ToMH(x) stdcli::TypeConverter::ConvertHandle<MHANDLE, UHANDLE&>(x)
+#define ToUH(x) stdcli::TypeConverter::ConvertHandle<UHANDLE, MHANDLE%>(x)
 
-namespace wcvlib
+namespace stdcli
 {
 	public ref class TypeConverter
 	{

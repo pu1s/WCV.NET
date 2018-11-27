@@ -5,6 +5,7 @@
 #include <string>
 
 #include "TypeConverter.h"
+#include <msclr/marshal_windows.h>
 
 //#pragma comment(lib, "user32.dll")
 
@@ -16,7 +17,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Reflection;
 
-namespace wcvlib
+namespace stdcli
 {
 	public value struct UniHandle
 	{

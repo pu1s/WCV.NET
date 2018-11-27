@@ -28,7 +28,7 @@ namespace wfwcv
             f.Show();
             var hh = Handle;
             uniHandle = uniHandle.Create(ref hh);
-           
+            UniHandle inihandle = UniHandle.Empty;
             button1.Text = uniHandle.ToString();
         }
     }
