@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 #include <WinUser.h>
+#include <msclr/marshal_windows.h>
 
 #using <System.dll>
 #using <System.Windows.Forms.dll>
@@ -96,6 +97,38 @@ namespace libwcv
 
 #define TO_MHWND(h) MarshalAs<UHWND, MHWND>(h)
 #define TO_UHWND(h) MarshalAs<MHWND, UHWND>(h)
+
+	
+}
+
+namespace msclr
+{
+	namespace interop
+	{
+		template<class _To_Type>
+		inline _To_Type marshal_as(System::Windows::Forms::Message% m);
+
+		template<>
+		inline MSG marshal_as(System::Windows::Forms::Message% m)
+		{
+			MSG msg;
+			msg.hwnd = static_cast<HWND>(m.HWnd.ToPointer());
+			msg.message = static_cast<UINT>(m.Msg);
+			msg.wParam = (WPARAM)m.WParam.ToPointer();
+			msg.lParam = (LPARAM)m.LParam.ToPointer();
+			return msg;
+		}
+
+		template<class _To_Type>
+		inline _To_Type marshal_as(System::IntPtr p);
+
+		template<>
+		inline HWND marshal_as(System::IntPtr p)
+		{
+			return (HWND)p.ToPointer();
+		}
+		
+	}
 }
 
 
