@@ -1,4 +1,4 @@
 #include "stdafx.h"
 
-#include "wcvlib.h"
+#include "libwcv.h"
 
