@@ -12,7 +12,10 @@ namespace System
 		: public System::Windows::Forms::Form
 	{
 	protected:
-		void WndProc(System::Windows::Forms::Message % msg) override;
-	}
+		void WndProc(System::Windows::Forms::Message % msg) override
+		{
+
+		}
+	};
 }
 

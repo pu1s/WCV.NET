@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using libwcv;
 
 namespace wcv
 {
@@ -15,6 +16,13 @@ namespace wcv
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public libwcv.testclass testclass;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            testclass = new testclass();
+            testclass.testfunc();
         }
     }
 }
