@@ -91,7 +91,8 @@ namespace wcvlib
 	public:
 		ClipboardViewerForm();
 		UniHandle^ pUniHandle;
-		
+		void OnShown() override
+		{}
 	protected:
 		void WndProc(System::Windows::Forms::Message% m) override;
 	};
