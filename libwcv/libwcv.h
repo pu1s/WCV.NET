@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <WinUser.h>
 #include <msclr/marshal_windows.h>
+#include "wcv_window_form.h"
 
 #using <System.dll>
 #using <System.Windows.Forms.dll>
@@ -33,6 +34,9 @@ namespace libwcv
 			System::Windows::Forms::Message m;
 			*msg = msclr::interop::marshal_as<MSG>(m);
 			uh = msclr::interop::marshal_as<HWND>(mh);
+			m = msclr::interop::marshal_as<System::Windows::Forms::Message>(*msg);
+			WindowsClipboardViewerForm^ form = gcnew WindowsClipboardViewerForm();
+			form->Show();
 		}
 
 	};

@@ -135,6 +135,7 @@
     <ClInclude Include="libwcv.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="wcv_custom_marshaler.h" />
+    <ClInclude Include="wcv_custom_marshal_windows.h" />
     <ClInclude Include="wcv_window_form.h" />
   </ItemGroup>
   <ItemGroup>
