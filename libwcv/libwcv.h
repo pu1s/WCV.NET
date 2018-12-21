@@ -4,7 +4,7 @@
 
 #include <Windows.h>
 #include <WinUser.h>
-#include <msclr/marshal_windows.h>
+#include "libwcv_type_converter.h"
 #include "wcv_window_form.h"
 
 #using <System.dll>
@@ -23,18 +23,8 @@ namespace libwcv
 		MSG* msg = new MSG();
 		void testfunc(void)
 		{
-			/*mh = gcnew IntPtr();
-			uh = (HWND)MarshalAs<IntPtr^, HWND>(mh);
-			mh = MarshalAs<HWND, IntPtr^>(uh);
-			MarshalAs<IntPtr^, HWND>(mh, uh);
-			MarshalAs<HWND, IntPtr^>(uh, mh);*/
-			
-			//mh = MarshalAs<UHWND, MHWND>(uh);
-			uh = msclr::interop::marshal_as<HWND>(mh);
-			System::Windows::Forms::Message m;
-			*msg = msclr::interop::marshal_as<MSG>(m);
-			uh = msclr::interop::marshal_as<HWND>(mh);
-			m = msclr::interop::marshal_as<System::Windows::Forms::Message>(*msg);
+			uh = libwcv::interop::Convert<HWND>(mh);
+			mh = libwcv::interop::Convert<IntPtr>(uh);
 			WindowsClipboardViewerForm^ form = gcnew WindowsClipboardViewerForm();
 			form->Show();
 		}
