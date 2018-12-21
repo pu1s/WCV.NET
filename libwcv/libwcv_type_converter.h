@@ -11,6 +11,12 @@ namespace libwcv
 {
 	namespace interop
 	{
+		typedef System::IntPtr					MHANDLE;
+		typedef HWND							UHANDLE;
+		typedef MSG								UMSG;
+		typedef System::Windows::Forms::Message MMSG;
+
+
 		template<typename _To>
 		inline _To convert(System::IntPtr){}
 

@@ -11,13 +11,13 @@ using namespace System;
 
 namespace ClipboardViewer
 {
-	public ref class WindowsClipboardViewer
+	public ref class ClipboardViewer
 	{
 	public:
-		WindowsClipboardViewer()
+		ClipboardViewer()
 		{
-			Form_ = gcnew WindowsClipboardViewerForm();
-			Form_->Show();
+			_form = gcnew WindowsClipboardViewerForm();
+			_form->Show();
 		}
 	private:
 		ref class WindowsClipboardViewerForm
@@ -26,15 +26,7 @@ namespace ClipboardViewer
 		private:
 			System::IntPtr	_nextClipboardViewer;
 			System::Int32	_lastError;
-		public:
-			property
-				System::IntPtr NextClipboardViewerHandle
-			{
-				System::IntPtr get()
-				{
-					return _nextClipboardViewer;
-				}
-			}
+		
 		protected:
 			void WndProc(System::Windows::Forms::Message % msg) override
 			{
@@ -55,7 +47,31 @@ namespace ClipboardViewer
 			}
 
 		};
-		WindowsClipboardViewerForm^ Form_;
+	private:
+		WindowsClipboardViewerForm^ _form;
+		System::IntPtr				_nextClipboardViewerHandle;
+	public:
+		property
+			System::IntPtr ClipboardViewerHandle
+		{
+			System::IntPtr get()
+			{
+				return this->_form->Handle;
+
+			}
+		}
+
+		property
+			System::IntPtr NextClipboardViewerHandle
+		{
+			System::IntPtr get()
+			{
+				return this->_nextClipboardViewerHandle;
+
+			}
+		}
+
+
 	};
 
 }

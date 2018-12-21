@@ -136,14 +136,12 @@
     <ClInclude Include="libwcv_custom_wndproc.h" />
     <ClInclude Include="libwcv_type_converter.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="wcv_custom_marshaler.h" />
-    <ClInclude Include="wcv_custom_marshal_windows.h" />
-    <ClInclude Include="wcv_window_form.h" />
+    <ClInclude Include="libwcv_clipboard_viewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="libwcv.cpp" />
-    <ClCompile Include="wcv_window_form.cpp" />
+    <ClCompile Include="libwcv_clipboard_viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
