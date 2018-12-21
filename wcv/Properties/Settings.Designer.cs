@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace wfwcv.Properties
+namespace wcv.Properties
 {
 
 
