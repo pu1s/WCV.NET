@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Windows.h>
+#include "libwcv_type_converter.h"
+
+
 #using <System.dll>
 #using <System.Windows.Forms.dll>
 
@@ -11,19 +14,20 @@ namespace System
 	public ref class WindowsClipboardViewerForm 
 		: public System::Windows::Forms::Form
 	{
-	protected:
-		void WndProc(System::Windows::Forms::Message % msg) override
+	private:
+		System::IntPtr	_nextClipboardViewer;
+		System::Int32	_lastError;
+	public:
+		property
+			System::IntPtr NextClipboardViewerHandle
 		{
-			switch (msg.Msg)
+			System::IntPtr get()
 			{
-			case WM_CREATE:
-				this->Text = this->Handle.ToString();
-				break;
-			default:
-				DefWndProc(msg);
-				break;
+				return _nextClipboardViewer;
 			}
 		}
+	protected:
+		void WndProc(System::Windows::Forms::Message % msg) override;
 	};
 }
 
