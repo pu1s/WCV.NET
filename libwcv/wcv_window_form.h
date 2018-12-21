@@ -9,25 +9,53 @@
 
 using namespace System;
 
-namespace System
+namespace ClipboardViewer
 {
-	public ref class WindowsClipboardViewerForm 
-		: public System::Windows::Forms::Form
+	public ref class WindowsClipboardViewer
 	{
-	private:
-		System::IntPtr	_nextClipboardViewer;
-		System::Int32	_lastError;
 	public:
-		property
-			System::IntPtr NextClipboardViewerHandle
+		WindowsClipboardViewer()
 		{
-			System::IntPtr get()
-			{
-				return _nextClipboardViewer;
-			}
+			Form_ = gcnew WindowsClipboardViewerForm();
+			Form_->Show();
 		}
-	protected:
-		void WndProc(System::Windows::Forms::Message % msg) override;
-	};
-}
+	private:
+		ref class WindowsClipboardViewerForm
+			: public System::Windows::Forms::Form
+		{
+		private:
+			System::IntPtr	_nextClipboardViewer;
+			System::Int32	_lastError;
+		public:
+			property
+				System::IntPtr NextClipboardViewerHandle
+			{
+				System::IntPtr get()
+				{
+					return _nextClipboardViewer;
+				}
+			}
+		protected:
+			void WndProc(System::Windows::Forms::Message % msg) override
+			{
+				switch (msg.Msg)
+				{
 
+				case WM_CREATE:
+					this->Text = this->Handle.ToString();
+					_nextClipboardViewer =
+						libwcv::interop::convert<System::IntPtr>((HWND)SetClipboardViewer(
+							libwcv::interop::convert<HWND>(this->Handle)
+						));
+					break;
+				default:
+					DefWndProc(msg);
+					break;
+				}
+			}
+
+		};
+		WindowsClipboardViewerForm^ Form_;
+	};
+
+}

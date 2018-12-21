@@ -11,6 +11,7 @@
 #using <System.Windows.Forms.dll>
 
 using namespace System;
+using namespace ClipboardViewer;
 
 namespace libwcv
 {
@@ -25,8 +26,9 @@ namespace libwcv
 		{
 			uh = libwcv::interop::convert<HWND>(mh);
 			mh = libwcv::interop::convert<IntPtr>(uh);
-			WindowsClipboardViewerForm^ form = gcnew WindowsClipboardViewerForm();
-			form->Show();
+			WindowsClipboardViewer ^a = gcnew WindowsClipboardViewer();
+			//A::WindowsClipboardViewerForm^ form = gcnew A::WindowsClipboardViewerForm();
+			//form->Show();
 		}
 
 	};
