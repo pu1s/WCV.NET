@@ -1,17 +1,17 @@
 ﻿#pragma once
 
-#include "wcv_custom_marshaler.h"
+
 
 #include <Windows.h>
 #include <WinUser.h>
 #include "libwcv_type_converter.h"
-#include "wcv_window_form.h"
+#include "libwcv_clipboard_viewer.h"
 
 #using <System.dll>
 #using <System.Windows.Forms.dll>
 
 using namespace System;
-using namespace ClipboardViewer;
+
 
 namespace libwcv
 {
@@ -26,7 +26,7 @@ namespace libwcv
 		{
 			uh = libwcv::interop::convert<HWND>(mh);
 			mh = libwcv::interop::convert<IntPtr>(uh);
-			WindowsClipboardViewer ^a = gcnew WindowsClipboardViewer();
+			ClipboardViewer ^a = gcnew ClipboardViewer();
 			//A::WindowsClipboardViewerForm^ form = gcnew A::WindowsClipboardViewerForm();
 			//form->Show();
 		}

@@ -7,9 +7,12 @@
 #using <System.dll>
 #using <System.Windows.Forms.dll>
 
+#pragma comment(lib, "user32.lib")
+
+
 using namespace System;
 
-namespace ClipboardViewer
+namespace libwcv
 {
 	public ref class ClipboardViewer
 	{
