@@ -40,7 +40,7 @@ namespace libwcv
 					this->Text = this->Handle.ToString();
 					_nextClipboardViewer =
 						libwcv::interop::convert<System::IntPtr>((HWND)SetClipboardViewer(
-							libwcv::interop::convert<HWND>(this->Handle)
+						libwcv::interop::convert<HWND>(this->Handle)
 						));
 					break;
 				default:
