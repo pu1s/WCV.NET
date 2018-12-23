@@ -29,7 +29,9 @@ namespace wcv
             //testclass = new testclass();
             //testclass.testfunc();
             libwcv.ClipboardViewer cv = new ClipboardViewer();
-            cv.ShowViewer();
+            //cv.ShowViewer();
+            button1.Text = cv.ToString();
+            this.Text = cv.ToString();
         }
     }
 }

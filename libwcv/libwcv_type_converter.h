@@ -36,7 +36,9 @@ namespace libwcv
 		}
 
 		template<typename _To>
-		inline _To clr_cast(MSG m) {}
+		inline _To clr_cast(MSG m) {
+			return _To();
+		}
 
 		template<>
 		inline System::Windows::Forms::Message clr_cast(MSG m) 
