@@ -20,7 +20,6 @@ namespace libwcv
 		ClipboardViewer()
 		{
 			_form = gcnew WindowsClipboardViewerForm();
-			_form->Show();
 		}
 	private:
 		ref class WindowsClipboardViewerForm
@@ -29,26 +28,12 @@ namespace libwcv
 		private:
 			System::IntPtr	_nextClipboardViewer;
 			System::Int32	_lastError;
+			
 		
 		protected:
-			void WndProc(System::Windows::Forms::Message % msg) override
-			{
-				switch (msg.Msg)
-				{
-
-				case WM_CREATE:
-					this->Text = this->Handle.ToString();
-					_nextClipboardViewer =
-						libwcv::interop::convert<System::IntPtr>((HWND)SetClipboardViewer(
-						libwcv::interop::convert<HWND>(this->Handle)
-						));
-					break;
-				default:
-					DefWndProc(msg);
-					break;
-				}
-			}
-
+			void WndProc(System::Windows::Forms::Message % msg) override;
+		public:
+			System::Int32 get_last_error();
 		};
 	private:
 		WindowsClipboardViewerForm^ _form;
@@ -60,7 +45,6 @@ namespace libwcv
 			System::IntPtr get()
 			{
 				return this->_form->Handle;
-
 			}
 		}
 
@@ -70,11 +54,19 @@ namespace libwcv
 			System::IntPtr get()
 			{
 				return this->_nextClipboardViewerHandle;
-
 			}
 		}
 
+		property
+			System::Int32 LastError
+		{
+			System::Int32 get()
+			{
+				return this->_form->get_last_error();
+			}
+		}
 
+		void ShowViewer();
 	};
 
 }

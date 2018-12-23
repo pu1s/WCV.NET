@@ -26,8 +26,10 @@ namespace wcv
 
         private void button1_Click(object sender, EventArgs e)
         {
-            testclass = new testclass();
-            testclass.testfunc();
+            //testclass = new testclass();
+            //testclass.testfunc();
+            libwcv.ClipboardViewer cv = new ClipboardViewer();
+            cv.ShowViewer();
         }
     }
 }

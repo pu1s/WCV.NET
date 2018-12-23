@@ -18,28 +18,28 @@ namespace libwcv
 
 
 		template<typename _To>
-		inline _To convert(System::IntPtr){}
+		inline _To clr_cast(System::IntPtr){}
 
 		template<>
-		inline HWND convert(System::IntPtr p)
+		inline HWND clr_cast(System::IntPtr p)
 		{
 			return (HWND)p.ToPointer();
 		}
 
 		template<typename _To>
-		inline _To convert(HWND h) {}
+		inline _To clr_cast(HWND h) {}
 
 		template<>
-		inline System::IntPtr convert(HWND h)
+		inline System::IntPtr clr_cast(HWND h)
 		{
 			return System::IntPtr(h);
 		}
 
 		template<typename _To>
-		inline _To convert(MSG m) {}
+		inline _To clr_cast(MSG m) {}
 
 		template<>
-		inline System::Windows::Forms::Message convert(MSG m) 
+		inline System::Windows::Forms::Message clr_cast(MSG m) 
 		{
 			System::Windows::Forms::Message msg;
 			msg.Create(System::IntPtr(m.hwnd), m.message, System::IntPtr((LONG)m.wParam), System::IntPtr((LONG)m.lParam));
@@ -47,10 +47,10 @@ namespace libwcv
 		}
 
 		template<typename _To>
-		inline _To convert(System::Windows::Forms::Message% m) {}
+		inline _To clr_cast(System::Windows::Forms::Message% m) {}
 
 		template<>
-		inline MSG convert(System::Windows::Forms::Message% m)
+		inline MSG clr_cast(System::Windows::Forms::Message% m)
 		{
 			MSG msg;
 			msg.hwnd = static_cast<HWND>(m.HWnd.ToPointer());

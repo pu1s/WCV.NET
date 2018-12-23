@@ -24,9 +24,6 @@
     <ClInclude Include="libwcv_type_converter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="libwcv_custom_wndproc.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="libwcv_clipboard_viewer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

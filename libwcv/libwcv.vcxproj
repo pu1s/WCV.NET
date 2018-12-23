@@ -133,7 +133,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="libwcv.h" />
-    <ClInclude Include="libwcv_custom_wndproc.h" />
     <ClInclude Include="libwcv_type_converter.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="libwcv_clipboard_viewer.h" />

@@ -24,9 +24,10 @@ namespace libwcv
 		MSG* msg = new MSG();
 		void testfunc(void)
 		{
-			uh = libwcv::interop::convert<HWND>(mh);
-			mh = libwcv::interop::convert<IntPtr>(uh);
+			uh = libwcv::interop::clr_cast<HWND>(mh);
+			mh = libwcv::interop::clr_cast<IntPtr>(uh);
 			ClipboardViewer ^a = gcnew ClipboardViewer();
+			a->ShowViewer();
 			//A::WindowsClipboardViewerForm^ form = gcnew A::WindowsClipboardViewerForm();
 			//form->Show();
 		}
