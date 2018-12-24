@@ -29,7 +29,9 @@ namespace libwcv
 			mh = libwcv::interop::clr_cast<IntPtr>(uh);
 			ClipboardViewer ^a = gcnew ClipboardViewer();
 			a->ShowViewer();*/
-			create_clipboard_viewer(L"clWindow", L" ", L"WOW");
+			uh = create_clipboard_viewer(L"clWindow", L" ", L"WOW");
+			Sleep(5000);
+			delete_clipboard_viewer(uh);
 			//A::WindowsClipboardViewerForm^ form = gcnew A::WindowsClipboardViewerForm();
 			//form->Show();
 		}

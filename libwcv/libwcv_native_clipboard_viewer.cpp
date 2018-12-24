@@ -68,7 +68,7 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-	return 0;
+	return clipboardViewer;
 }
 
 BOOL __stdcall delete_clipboard_viewer(HWND hwnd) noexcept
