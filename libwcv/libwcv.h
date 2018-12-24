@@ -11,12 +11,14 @@
 #using <System.dll>
 #using <System.Windows.Forms.dll>
 
+#define MASTER_TRACE
+
 using namespace System;
 
 
 namespace libwcv
 {
-	public ref class testclass
+	public ref class CBWrapper
 	{
 	public:
 		

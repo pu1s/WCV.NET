@@ -4,9 +4,14 @@
 
 HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, LPCWSTR window_title, WNDPROC alt_wnd_proc) noexcept
 {
-
+	if (class_name == L"")
+	{
+		MessageBox(NULL, L"Window Class Name is Requred!", L"Error!",
+			MB_ICONEXCLAMATION | MB_OK);
+		return 0;
+	}
+	windowClassName = class_name;
 	MSG msg;
-	HINSTANCE hInstance;
 	//
 	hInstance = GetModuleHandle(NULL);
 	//
@@ -29,7 +34,7 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wc.lpszMenuName = NULL;
-	wc.lpszClassName = class_name;
+	wc.lpszClassName = windowClassName;
 	wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
 	//
@@ -43,7 +48,7 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	//
 	clipboardViewer = CreateWindowEx(
 		WS_EX_CLIENTEDGE,
-		class_name,
+		windowClassName,
 		window_title,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
@@ -95,6 +100,9 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		{
 			SendMessage(nextClipboardViewer, uMsg, wParam, lParam);
 		}
+#ifdef _DEBUG
+		MessageBox(NULL, L"Clipboard Updated", NULL, NULL);
+#endif // _DEBUG
 		break;
 	case WM_CHANGECBCHAIN:
 		if ((HWND)wParam == nextClipboardViewer)
@@ -105,12 +113,21 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		{
 			SendMessage(nextClipboardViewer, uMsg, wParam, lParam);
 		}
+#ifdef _DEBUG
+		MessageBox(NULL, L"Chain Change", NULL, NULL);
+#endif // _DEBUG
 		break;
 	case WM_DESTROY:
 		ChangeClipboardChain(clipboardViewer, nextClipboardViewer);
+		
+#ifdef _DEBUG
+		MessageBox(NULL, L"Destruct Window", NULL, NULL);
+#endif // _DEBUG
+		break;
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		break;
-		return 0;
+		
 	}
+	return 0;
 }

@@ -25,9 +25,11 @@ struct tagClipboardData
 }CLIPBOARDDATASTRUCT;
 
 // Global variable
-static HWND		nextClipboardViewer;
-static HWND		clipboardViewer;
-static DWORD	lastError;
+static HWND			nextClipboardViewer;
+static HWND			clipboardViewer;
+static DWORD		lastError;
+static HINSTANCE	hInstance;
+static LPCWSTR		windowClassName;
 //
 static CLIPBOARDOWNERINFOSTRUCT	ClipboardOwnerInfo;
 static CLIPBOARDDATASTRUCT		ClipboardData;

@@ -13,11 +13,11 @@ namespace wcv
 {
     public partial class Form1 : Form
     {
-        private testclass testclass;
+        private CBWrapper testclass;
         public Form1()
         {
             InitializeComponent();
-            this.testclass = new testclass();
+            this.testclass = new CBWrapper();
         }
 
         

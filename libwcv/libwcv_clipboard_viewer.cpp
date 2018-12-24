@@ -2,7 +2,7 @@
 
 inline void libwcv::ClipboardViewer::WindowsClipboardViewerForm::WndProc(System::Windows::Forms::Message % msg)
 {
-	MSG m;// = new MSG();
+	MSG m;
 	m = libwcv::interop::clr_cast<MSG>(msg);
 	switch (msg.Msg)
 	{
