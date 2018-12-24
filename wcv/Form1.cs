@@ -13,12 +13,14 @@ namespace wcv
 {
     public partial class Form1 : Form
     {
+        private testclass testclass;
         public Form1()
         {
             InitializeComponent();
+            this.testclass = new testclass();
         }
 
-        public libwcv.testclass testclass;
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -26,12 +28,17 @@ namespace wcv
 
         private void button1_Click(object sender, EventArgs e)
         {
-            testclass = new testclass();
-            testclass.testfunc();
+            
+            testclass.Create();
             //libwcv.ClipboardViewer cv = new ClipboardViewer();
             ////cv.ShowViewer();
             //button1.Text = cv.ToString();
             //this.Text = cv.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            testclass.Destroy();
         }
     }
 }

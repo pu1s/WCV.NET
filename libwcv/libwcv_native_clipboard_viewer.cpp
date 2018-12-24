@@ -71,18 +71,18 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	return clipboardViewer;
 }
 
-BOOL __stdcall delete_clipboard_viewer(HWND hwnd) noexcept
+BOOL __stdcall destroy_clipboard_viewer() noexcept
 {
-	return DestroyWindow(hwnd);
+	return DestroyWindow(clipboardViewer);
 }
 
-LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	switch (msg)
+	switch (uMsg)
 	{
 	case WM_CREATE:
 #ifdef _DEBUG
-		MessageBox(NULL, L"Window create", L"Attention", NULL);
+		//MessageBox(NULL, L"Window create", L"Attention", NULL);
 #endif // _
 		if (!(nextClipboardViewer = (HWND)SetClipboardViewer(clipboardViewer)))
 		{
@@ -93,7 +93,7 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
 		//TODO: Основной код
 		if (nextClipboardViewer)
 		{
-			SendMessage(nextClipboardViewer, msg, wParam, lParam);
+			SendMessage(nextClipboardViewer, uMsg, wParam, lParam);
 		}
 		break;
 	case WM_CHANGECBCHAIN:
@@ -103,13 +103,13 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
 		}
 		else if (!nextClipboardViewer)
 		{
-			SendMessage(nextClipboardViewer, msg, wParam, lParam);
+			SendMessage(nextClipboardViewer, uMsg, wParam, lParam);
 		}
 		break;
 	case WM_DESTROY:
 		ChangeClipboardChain(clipboardViewer, nextClipboardViewer);
 	default:
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		break;
 		return 0;
 	}
