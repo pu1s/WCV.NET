@@ -11,7 +11,7 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	hInstance = GetModuleHandle(NULL);
 	//
 	WNDCLASSEX wc;
-	
+
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;
 	if (alt_wnd_proc == NULL)
@@ -31,7 +31,7 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	wc.lpszMenuName = NULL;
 	wc.lpszClassName = class_name;
 	wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	
+
 	//
 	if (!RegisterClassEx(&wc))
 	{
@@ -71,14 +71,14 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 	return 0;
 }
 
-BOOL __stdcall delete_clipboard_viewer() noexcept
+BOOL __stdcall delete_clipboard_viewer(HWND hwnd) noexcept
 {
-	return 0;
+	return DestroyWindow(hwnd);
 }
 
-LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	switch (message)
+	switch (msg)
 	{
 	case WM_CREATE:
 #ifdef _DEBUG
@@ -90,13 +90,26 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT message, WPARAM wParam, L
 		}
 		break;
 	case WM_DRAWCLIPBOARD:
-		break;
-	case WM_CLOSE:
+		//TODO: Основной код
+		if (nextClipboardViewer)
+		{
+			SendMessage(nextClipboardViewer, msg, wParam, lParam);
+		}
 		break;
 	case WM_CHANGECBCHAIN:
+		if ((HWND)wParam == nextClipboardViewer)
+		{
+			nextClipboardViewer = (HWND)lParam;
+		}
+		else if (!nextClipboardViewer)
+		{
+			SendMessage(nextClipboardViewer, msg, wParam, lParam);
+		}
 		break;
+	case WM_DESTROY:
+		ChangeClipboardChain(clipboardViewer, nextClipboardViewer);
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 		break;
 		return 0;
 	}
