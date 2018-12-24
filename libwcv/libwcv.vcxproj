@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="libwcv.h" />
+    <ClInclude Include="libwcv_native_clipboard_viewer.h" />
     <ClInclude Include="libwcv_type_converter.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="libwcv_clipboard_viewer.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="libwcv.cpp" />
     <ClCompile Include="libwcv_clipboard_viewer.cpp" />
+    <ClCompile Include="libwcv_native_clipboard_viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

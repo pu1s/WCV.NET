@@ -26,12 +26,12 @@ namespace wcv
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //testclass = new testclass();
-            //testclass.testfunc();
-            libwcv.ClipboardViewer cv = new ClipboardViewer();
-            //cv.ShowViewer();
-            button1.Text = cv.ToString();
-            this.Text = cv.ToString();
+            testclass = new testclass();
+            testclass.testfunc();
+            //libwcv.ClipboardViewer cv = new ClipboardViewer();
+            ////cv.ShowViewer();
+            //button1.Text = cv.ToString();
+            //this.Text = cv.ToString();
         }
     }
 }
