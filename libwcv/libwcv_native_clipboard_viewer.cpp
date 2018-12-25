@@ -131,3 +131,30 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 	}
 	return 0;
 }
+
+BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info) noexcept
+{
+	BOOL		result;
+	DWORD		proc_id;
+	DWORD		thread_id;
+	HWND		clipboard_owner_window_handle;
+	HINSTANCE	hinst;
+	TCHAR		buf[MAX_PATH] = { 0 };
+	HANDLE		proc_handle;
+
+	//
+	clipboard_owner_window_handle = (HWND)GetClipboardOwner();
+	if (!clipboard_owner_window_handle)
+	{
+		lastError = GetLastError();
+		return 0;
+	}
+	//
+	thread_id = GetWindowThreadProcessId(clipboard_owner_window_handle, &proc_id);
+
+	//
+	proc_handle = (HANDLE)OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, proc_id);
+	GetModuleFileName((HMODULE)proc_handle, buf, MAX_PATH);
+	CloseHandle(proc_handle);
+	return 0;
+}

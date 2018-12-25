@@ -25,6 +25,7 @@ namespace libwcv
 		System::IntPtr mh;
 		HWND uh, uh1;
 		MSG* msg = new MSG();
+		CLIPBOARDOWNERINFOSTRUCT* data_owner = new CLIPBOARDOWNERINFOSTRUCT();
 		void testfunc(void)
 		{
 			/*uh = libwcv::interop::clr_cast<HWND>(mh);
@@ -39,11 +40,15 @@ namespace libwcv
 
 		void Create() 
 		{
-			uh = create_clipboard_viewer(L"clWindow", L" ", L"WOW");
+			uh = create_clipboard_viewer(L"clWindow", L" ", L"WOW");	
 		}
 		void Destroy()
 		{
 			destroy_clipboard_viewer();
+		}
+		void GetData()
+		{
+			get_clipboard_owner_info(data_owner);
 		}
 	};
 }
