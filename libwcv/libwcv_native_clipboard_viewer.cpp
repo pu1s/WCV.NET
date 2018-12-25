@@ -139,8 +139,10 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	DWORD		thread_id;
 	HWND		clipboard_owner_window_handle;
 	HINSTANCE	hinst;
-	TCHAR		buf[MAX_PATH] = { 0 };
+	TCHAR		proc_name[MAX_PATH] = { 0 };
 	HANDLE		proc_handle;
+	int			window_title_length;
+	TCHAR		window_title[MAX_PATH] = { 0 };
 
 	//
 	clipboard_owner_window_handle = (HWND)GetClipboardOwner();
@@ -149,12 +151,34 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 		lastError = GetLastError();
 		return 0;
 	}
+	if (!(IsWindow(clipboard_owner_window_handle)))
+
+	{
+		SetLastError(1400);
+		lastError = GetLastError();
+		return 0;
+	}
 	//
 	thread_id = GetWindowThreadProcessId(clipboard_owner_window_handle, &proc_id);
 
 	//
 	proc_handle = (HANDLE)OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, proc_id);
-	GetModuleFileName((HMODULE)proc_handle, buf, MAX_PATH);
+	
+	GetProcessImageFileName(proc_handle, proc_name, MAX_PATH);
 	CloseHandle(proc_handle);
+	//window_title_length = SendMessage(clipboard_owner_window_handle, WM_GETTEXT, MAX_PATH, (LPARAM)window_title);
+
+	window_title_length = GetWindowTextLength(clipboard_owner_window_handle);
+	if (GetWindowText(clipboard_owner_window_handle, window_title, window_title_length + 1) == 0)
+	{
+		lastError = GetLastError();
+	}
+	//
+	clipboard_owner_info->ClipboardOwnerModuleName		= proc_name;
+	clipboard_owner_info->ClipboardOwnerProcHandle		= proc_handle;
+	clipboard_owner_info->ClipboardOwnerProcId			= proc_id;
+	clipboard_owner_info->ClipboardOwnerWindowHandle	= clipboard_owner_window_handle;
+	clipboard_owner_info->ClipboardOwnerThreadId		= thread_id;
+	clipboard_owner_info->ClipboardOwnerWindowTitle		= window_title;
 	return 0;
 }

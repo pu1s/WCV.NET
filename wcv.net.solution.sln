@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28407.52
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wcv", "wcv\wcv.csproj", "{1C14DD61-4D59-4D47-AC41-BB54A8924300}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwcv", "libwcv\libwcv.vcxproj", "{E1AEF4C4-6622-4BCA-8997-6D23E18C9EFB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "capp", "capp\capp.vcxproj", "{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,16 @@ Global
 		{E1AEF4C4-6622-4BCA-8997-6D23E18C9EFB}.Release|x64.Build.0 = Release|x64
 		{E1AEF4C4-6622-4BCA-8997-6D23E18C9EFB}.Release|x86.ActiveCfg = Release|Win32
 		{E1AEF4C4-6622-4BCA-8997-6D23E18C9EFB}.Release|x86.Build.0 = Release|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Debug|x64.ActiveCfg = Debug|x64
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Debug|x64.Build.0 = Debug|x64
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Debug|x86.ActiveCfg = Debug|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Debug|x86.Build.0 = Debug|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Release|Any CPU.ActiveCfg = Release|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Release|x64.ActiveCfg = Release|x64
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Release|x64.Build.0 = Release|x64
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Release|x86.ActiveCfg = Release|Win32
+		{FCDFD01A-1AD7-42B5-BD04-9136E3CEC6AD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

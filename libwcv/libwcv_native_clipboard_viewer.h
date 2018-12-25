@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <WinUser.h>
+#include <psapi.h>
 
 //
 typedef
@@ -10,9 +11,10 @@ struct tagClipboardOwnerInfo
 	LPCWSTR		ClipboardOwnerWindowTitle;
 	HWND		ClipboardOwnerWindowHandle;
 	LPCWSTR		ClipboardOwnerProcName;
-	HWND		ClipboardOwnerProcHandle;
+	HANDLE		ClipboardOwnerProcHandle;
 	LONG		ClipboardOwnerProcId;
 	LPCWSTR		ClipboardOwnerModuleName;
+	DWORD		ClipboardOwnerThreadId;
 }CLIPBOARDOWNERINFOSTRUCT;
 
 //
