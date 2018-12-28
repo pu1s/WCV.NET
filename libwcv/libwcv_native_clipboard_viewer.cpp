@@ -166,8 +166,7 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	
 	GetProcessImageFileName(proc_handle, proc_name, MAX_PATH);
 	CloseHandle(proc_handle);
-	//window_title_length = SendMessage(clipboard_owner_window_handle, WM_GETTEXT, MAX_PATH, (LPARAM)window_title);
-
+	
 	window_title_length = GetWindowTextLength(clipboard_owner_window_handle);
 	if (GetWindowText(clipboard_owner_window_handle, window_title, window_title_length + 1) == 0)
 	{
@@ -180,5 +179,24 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	clipboard_owner_info->ClipboardOwnerWindowHandle	= clipboard_owner_window_handle;
 	clipboard_owner_info->ClipboardOwnerThreadId		= thread_id;
 	clipboard_owner_info->ClipboardOwnerWindowTitle		= window_title;
+
+	CUSTOMWINDOWINFO* wi = new CUSTOMWINDOWINFO();
+	if (EnumWindows(clipboard_viewer_enum_windows_proc, (LPARAM)proc_id))
+		wcout << L"Houp" << endl;
+	wcout << L"True" << endl;
 	return 0;
+}
+
+BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
+{
+	DWORD procid, tid, pid;
+	pid = (DWORD)lParam;
+	GetWindowThreadProcessId(hWnd, &procid);
+	if (procid == pid) 
+	{ 
+		wcout << hWnd <<L" :" << procid << endl;
+		wcout << L"Yes" << endl;
+		return FALSE; 
+	}
+	return TRUE;
 }
