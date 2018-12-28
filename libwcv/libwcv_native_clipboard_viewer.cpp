@@ -132,13 +132,26 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 	return 0;
 }
 
+BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
+{
+	wchar_t class_name[250];
+	wchar_t title[250];
+	GetClassName(hWnd, class_name, sizeof(class_name));
+	GetWindowText(hWnd, title, sizeof(title));
+	std::wcout << "Window title: " << title << std::endl;
+	std::wcout << "Class name: " << class_name << std::endl << std::endl;
+
+
+	return TRUE;
+}
+
 BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info) noexcept
 {
 	BOOL		result;
 	DWORD		proc_id;
 	DWORD		thread_id;
 	HWND		clipboard_owner_window_handle;
-	HINSTANCE	hinst;
+	HINSTANCE*	hinst;
 	TCHAR		proc_name[MAX_PATH] = { 0 };
 	HANDLE		proc_handle;
 	int			window_title_length;
@@ -160,19 +173,31 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	}
 	//
 	thread_id = GetWindowThreadProcessId(clipboard_owner_window_handle, &proc_id);
+	hinst = new HINSTANCE();
+	LPCWSTR className = {0};
+	LPWNDCLASSEX classEx = new WNDCLASSEX();
+	auto aa = GetClassLongPtr(clipboard_owner_window_handle, GCLP_HMODULE);
 
+	
 	//
 	proc_handle = (HANDLE)OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, proc_id);
 	
 	GetProcessImageFileName(proc_handle, proc_name, MAX_PATH);
+	__int64 appinstance = GetWindowLongPtr(clipboard_owner_window_handle, GWLP_HINSTANCE);
+	GetModuleFileNameEx(proc_handle, (HMODULE)appinstance, proc_name, MAX_PATH);
+	auto ii = GetClassInfoEx((HINSTANCE)appinstance, className, classEx);
 	CloseHandle(proc_handle);
-	//window_title_length = SendMessage(clipboard_owner_window_handle, WM_GETTEXT, MAX_PATH, (LPARAM)window_title);
+	PWINDOWINFO wi = new tagWINDOWINFO();
+	GetWindowInfo(clipboard_owner_window_handle, wi);
+	window_title_length = SendMessage(clipboard_owner_window_handle, WM_GETTEXT, MAX_PATH, (LPARAM)window_title);
+	EnumWindows(EnumWindowsProc, NULL);
+	
 
-	window_title_length = GetWindowTextLength(clipboard_owner_window_handle);
+	/*window_title_length = GetWindowTextLength(clipboard_owner_window_handle);
 	if (GetWindowText(clipboard_owner_window_handle, window_title, window_title_length + 1) == 0)
 	{
 		lastError = GetLastError();
-	}
+	}*/
 	//
 	clipboard_owner_info->ClipboardOwnerModuleName		= proc_name;
 	clipboard_owner_info->ClipboardOwnerProcHandle		= proc_handle;
