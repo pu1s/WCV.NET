@@ -138,6 +138,7 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	DWORD		proc_id;
 	DWORD		thread_id;
 	HWND		clipboard_owner_window_handle;
+	HWND		next_window;
 	HINSTANCE	hinst;
 	TCHAR		proc_name[MAX_PATH] = { 0 };
 	HANDLE		proc_handle;
@@ -158,6 +159,13 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 		lastError = GetLastError();
 		return 0;
 	}
+
+	/*if (!(IsWindowVisible(clipboard_owner_window_handle)))
+	{
+		wcout << L"Window not visible" << endl;
+	}
+*/
+	
 	//
 	thread_id = GetWindowThreadProcessId(clipboard_owner_window_handle, &proc_id);
 
@@ -168,10 +176,20 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	CloseHandle(proc_handle);
 	
 	window_title_length = GetWindowTextLength(clipboard_owner_window_handle);
+
+	WINDOWINFO* wi = new WINDOWINFO();
+
 	if (GetWindowText(clipboard_owner_window_handle, window_title, window_title_length + 1) == 0)
 	{
-		lastError = GetLastError();
+		//EnumChildWindows(clipboard_owner_window_handle, clipboard_viewer_enum_child_windows_proc, 0);
 	}
+	//next_window = (HWND)GetWindowLongPtr(clipboard_owner_window_handle, GWLP_HWNDPARENT);
+
+	next_window = (HWND)GetWindowLong(clipboard_owner_window_handle, GWLP_HWNDPARENT);
+	window_title_length = GetWindowTextLength(next_window);
+
+	GetWindowText(next_window, window_title, MAX_PATH);
+
 	//
 	clipboard_owner_info->ClipboardOwnerModuleName		= proc_name;
 	clipboard_owner_info->ClipboardOwnerProcHandle		= proc_handle;
@@ -180,7 +198,7 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	clipboard_owner_info->ClipboardOwnerThreadId		= thread_id;
 	clipboard_owner_info->ClipboardOwnerWindowTitle		= window_title;
 
-	CUSTOMWINDOWINFO* wi = new CUSTOMWINDOWINFO();
+	//CUSTOMWINDOWINFO* wi = new CUSTOMWINDOWINFO();
 	if (EnumWindows(clipboard_viewer_enum_windows_proc, (LPARAM)proc_id))
 		wcout << L"Houp" << endl;
 	wcout << L"True" << endl;
@@ -199,4 +217,10 @@ BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 		return FALSE; 
 	}
 	return TRUE;
+}
+
+BOOL clipboard_viewer_enum_child_windows_proc(HWND hWnd, LPARAM lParam) noexcept
+{
+	wcout << L"Call Child Yes" << endl;
+	return FALSE;
 }

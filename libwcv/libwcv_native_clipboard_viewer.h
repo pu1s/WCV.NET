@@ -58,5 +58,7 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARA
 BOOL WINAPI get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info) noexcept;
 
 BOOL CALLBACK clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept;
+
+BOOL CALLBACK clipboard_viewer_enum_child_windows_proc(HWND hWnd, LPARAM lParam) noexcept;
 //
 
