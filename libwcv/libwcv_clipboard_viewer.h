@@ -22,6 +22,7 @@ namespace libwcv
 		{
 			_clipboardViewerForm = gcnew Win32CVF();
 			//DIAG_OUT(_clipboardViewerForm->Handle.ToString());
+			OnCreate();
 		}
 	private:
 		ref class Win32CVF
@@ -101,25 +102,13 @@ namespace libwcv
 		void HideViewer();
 		System::String^ ToString() override;
 	public:
-		event System::EventHandler^ ClipboardViewerCreated
+		static event System::EventHandler^ Create;
+	protected:
+		static void OnCreate()
 		{
-			void add(System::EventHandler^ d)
-			{
-				ClipboardViewerCreated += d;
-			}
-			void remove(System::EventHandler^ d)
-			{
-				ClipboardViewerCreated -= d;
-			}
-			void raise(System::EventHandler^ d, System::EventArgs^ a)
-			{
-				
-				if (d)
-				{
-					d->Invoke(this, &a);
-				}
-			}
+			Create(nullptr, gcnew System::EventArgs());
 		}
+		
 		
 	protected:
 		

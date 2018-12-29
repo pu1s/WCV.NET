@@ -18,13 +18,15 @@ namespace wcv
         public Form1()
         {
             InitializeComponent();
-            cv = new ClipboardViewer();
-            cv.ClipboardViewerCreated += Cv_ClipboardViewerCreated;
+            libwcv.ClipboardViewer.Create += CvOnCreate;
+            cv = new ClipboardViewer(); 
         }
 
-        private void Cv_ClipboardViewerCreated(object sender, EventArgs e)
+       
+
+        private void CvOnCreate(object sender, EventArgs e)
         {
-           
+            //MessageBox.Show("Created yes");
         }
 
         private void Form1_Load(object sender, EventArgs e)
