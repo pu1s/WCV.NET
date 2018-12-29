@@ -93,8 +93,11 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		{
 			lastError = GetLastError();
 		}
+		wcout << L"Create Viewer" << endl;
 		break;
 	case WM_DRAWCLIPBOARD:
+		wcout << L"Clipboard Updated" << endl;
+		get_clipboard_owner_info(&ClipboardOwnerInfo);
 		//TODO: Основной код
 		if (nextClipboardViewer)
 		{
@@ -181,22 +184,29 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	clipboard_owner_info->ClipboardOwnerWindowTitle		= window_title;
 
 	CUSTOMWINDOWINFO* wi = new CUSTOMWINDOWINFO();
-	if (EnumWindows(clipboard_viewer_enum_windows_proc, (LPARAM)proc_id))
-		wcout << L"Houp" << endl;
-	wcout << L"True" << endl;
+	if (EnumWindows(clipboard_viewer_enum_windows_proc, (LPARAM)proc_id)) {
+		wcout << L"EnumWindows" << endl;
+	}
+	if (EnumChildWindows(clipboard_owner_window_handle, clipboard_viewer_enum_windows_proc, (LPARAM)proc_id))
+	{
+		wcout << L"EnumChildWindows" << endl;
+	}
 	return 0;
 }
 
 BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 {
-	DWORD procid, tid, pid;
-	pid = (DWORD)lParam;
-	GetWindowThreadProcessId(hWnd, &procid);
-	if (procid == pid) 
-	{ 
-		wcout << hWnd <<L" :" << procid << endl;
-		wcout << L"Yes" << endl;
-		return FALSE; 
+	wchar_t buffer[MAX_PATH];
+	DWORD process32ID1, process32ID2;
+	HWND foreground = (HWND)GetForegroundWindow();
+	GetWindowThreadProcessId(hWnd, &process32ID1);
+	GetWindowThreadProcessId(foreground, &process32ID2);
+	if (process32ID1 == process32ID2 )
+	{
+		wcout << L"Window found" << endl;
+		GetWindowText(foreground, buffer, 260);
+		wcout << buffer << endl;
+		return FALSE;
 	}
 	return TRUE;
 }

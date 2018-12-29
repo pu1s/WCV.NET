@@ -1,6 +1,6 @@
 #include "libwcv_clipboard_viewer.h"
 
-inline void libwcv::ClipboardViewer::WindowsClipboardViewerForm::WndProc(System::Windows::Forms::Message % msg)
+inline void libwcv::ClipboardViewer::Win32CVF::WndProc(System::Windows::Forms::Message % msg)
 {
 	MSG m;
 	m = libwcv::interop::clr_cast<MSG>(msg);
@@ -9,12 +9,19 @@ inline void libwcv::ClipboardViewer::WindowsClipboardViewerForm::WndProc(System:
 
 	case WM_CREATE:
 		this->Text = this->Handle.ToString();
-		_lastError = set_clipboard_viewer(_nextClipboardViewer);
+		if (0 !=(_Win32CVF_lastError = _Win32CVF_set_clipboard_viewer(_Win32CVF_nextClipboardViewer)))
+		{
+			_Win32CVF_is_enabled = true;
+		}
+		DIAG_OUT(this->Handle.ToString() + 
+			"\n" + _Win32CVF_nextClipboardViewer.ToString() + 
+			"\n" + _Win32CVF_lastError.ToString());
 		break;
 	case WM_DRAWCLIPBOARD:
-		if (IsWindow(libwcv::interop::clr_cast<HWND>(_nextClipboardViewer)) || _nextClipboardViewer!= System::IntPtr::Zero)
+
+		if (IsWindow(libwcv::interop::clr_cast<HWND>(_Win32CVF_nextClipboardViewer)) || _Win32CVF_nextClipboardViewer!= System::IntPtr::Zero)
 		{
-			PostMessage(libwcv::interop::clr_cast<HWND>(_nextClipboardViewer), m.message, m.wParam, m.lParam);
+			PostMessage(libwcv::interop::clr_cast<HWND>(_Win32CVF_nextClipboardViewer), m.message, m.wParam, m.lParam);
 		}
 		break;
 	default:
@@ -23,17 +30,22 @@ inline void libwcv::ClipboardViewer::WindowsClipboardViewerForm::WndProc(System:
 	}
 }
 
-System::Int32 libwcv::ClipboardViewer::WindowsClipboardViewerForm::get_last_error()
+System::Int32 libwcv::ClipboardViewer::Win32CVF::Win32CVF_get_last_error()
 {
-	return _lastError;
+	return _Win32CVF_lastError;
 }
 
-System::IntPtr libwcv::ClipboardViewer::WindowsClipboardViewerForm::get_next_clipboard_viewer_handle()
+System::IntPtr libwcv::ClipboardViewer::Win32CVF::Win32CVF_get_next_clipboard_viewer_handle()
 {
-	return _nextClipboardViewer;
+	return _Win32CVF_nextClipboardViewer;
 }
 
-System::Int32 libwcv::ClipboardViewer::WindowsClipboardViewerForm::set_clipboard_viewer(System::IntPtr % next_clipboard_viewer_handle)
+bool libwcv::ClipboardViewer::Win32CVF::Win32CVF_get_is_enabled()
+{
+	return _Win32CVF_is_enabled;
+}
+
+System::Int32 libwcv::ClipboardViewer::Win32CVF::_Win32CVF_set_clipboard_viewer(System::IntPtr % next_clipboard_viewer_handle)
 {
 	System::Int32 return_value = 0;
 	System::IntPtr _next_clipboard_viewer_handle = System::IntPtr::Zero;
@@ -47,9 +59,17 @@ System::Int32 libwcv::ClipboardViewer::WindowsClipboardViewerForm::set_clipboard
 
 void libwcv::ClipboardViewer::ShowViewer()
 {
-	if (_form->Handle != System::IntPtr::Zero)
+	if (_clipboardViewerForm->Handle != System::IntPtr::Zero)
 	{
-		_form->Show();
+		_clipboardViewerForm->Show();
+	}
+}
+
+void libwcv::ClipboardViewer::CloseViewer()
+{
+	if (_clipboardViewerForm->Handle != System::IntPtr::Zero)
+	{
+		_clipboardViewerForm->Hide();
 	}
 }
 
