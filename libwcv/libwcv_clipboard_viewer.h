@@ -14,6 +14,7 @@ using namespace System;
 
 namespace libwcv
 {
+	
 	public ref class ClipboardViewer
 	{
 	public:
@@ -53,7 +54,7 @@ namespace libwcv
 		{
 			bool get()
 			{
-				this->_clipboardViewerForm->Win32CVF_get_is_enabled();
+				return this->_clipboardViewerForm->Win32CVF_get_is_enabled();
 			}
 		}
 		property
@@ -97,8 +98,31 @@ namespace libwcv
 		}
 		
 		void ShowViewer();
-		void CloseViewer();
+		void HideViewer();
 		System::String^ ToString() override;
+	public:
+		event System::EventHandler^ ClipboardViewerCreated
+		{
+			void add(System::EventHandler^ d)
+			{
+				ClipboardViewerCreated += d;
+			}
+			void remove(System::EventHandler^ d)
+			{
+				ClipboardViewerCreated -= d;
+			}
+			void raise(System::EventHandler^ d, System::EventArgs^ a)
+			{
+				
+				if (d)
+				{
+					d->Invoke(this, &a);
+				}
+			}
+		}
+		
+	protected:
+		
 	};
 
 	public value struct ClipboardOwnerInfo

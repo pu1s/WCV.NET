@@ -65,7 +65,7 @@ void libwcv::ClipboardViewer::ShowViewer()
 	}
 }
 
-void libwcv::ClipboardViewer::CloseViewer()
+void libwcv::ClipboardViewer::HideViewer()
 {
 	if (_clipboardViewerForm->Handle != System::IntPtr::Zero)
 	{

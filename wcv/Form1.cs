@@ -19,9 +19,14 @@ namespace wcv
         {
             InitializeComponent();
             cv = new ClipboardViewer();
+            cv.ClipboardViewerCreated += Cv_ClipboardViewerCreated;
         }
 
-        
+        private void Cv_ClipboardViewerCreated(object sender, EventArgs e)
+        {
+           
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -31,12 +36,13 @@ namespace wcv
         {
 
             cv.ShowViewer();
-            button1.Text = cv.ClipboardViewerHandle.ToString();
+            richTextBox1.Text = cv.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            button2.Text = "Hide";
+            cv.HideViewer();
         }
 
         private void button3_Click(object sender, EventArgs e)
