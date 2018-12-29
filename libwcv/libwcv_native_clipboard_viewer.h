@@ -49,6 +49,7 @@ static CLIPBOARDOWNERINFOSTRUCT	ClipboardOwnerInfo;
 static CLIPBOARDDATASTRUCT		ClipboardData;
 
 
+
 HWND WINAPI create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name = L" ", LPCWSTR window_title = L" ", WNDPROC alt_wnd_proc = NULL) noexcept;
 
 BOOL WINAPI destroy_clipboard_viewer() noexcept;

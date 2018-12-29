@@ -9,18 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using libwcv;
 
+
 namespace wcv
 {
     public partial class Form1 : Form
     {
-        private CBWrapper testclass;
+        private libwcv.ClipboardViewer cv;
         public Form1()
         {
             InitializeComponent();
-            this.testclass = new CBWrapper();
+            cv = new ClipboardViewer();
+            cv.ClipboardViewerCreated += Cv_ClipboardViewerCreated;
         }
 
-        
+        private void Cv_ClipboardViewerCreated(object sender, EventArgs e)
+        {
+           
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -28,22 +34,20 @@ namespace wcv
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            testclass.Create();
-            //libwcv.ClipboardViewer cv = new ClipboardViewer();
-            ////cv.ShowViewer();
-            //button1.Text = cv.ToString();
-            //this.Text = cv.ToString();
+
+            cv.ShowViewer();
+            richTextBox1.Text = cv.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            testclass.Destroy();
+            button2.Text = "Hide";
+            cv.HideViewer();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            testclass.GetData();
+            
         }
     }
 }

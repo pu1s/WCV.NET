@@ -10,8 +10,8 @@ int main()
 {
 	
     std::cout << "Hello World!\n"; 
-	CLIPBOARDOWNERINFOSTRUCT cs;
-	get_clipboard_owner_info(&cs);
+	create_clipboard_viewer(L" ", L" ", L" ", NULL);
+	
 	system("pause");
 }
 
