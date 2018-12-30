@@ -9,6 +9,14 @@ using namespace std;
 
 //
 typedef
+struct tsgMainWindowProc
+{
+	HWND		hForegroundWindowHandle;
+	HWND		hClipboardOwnerHandle;
+	DWORD		dProcID;
+}MAINWINDOWPROC;
+
+typedef
 struct tagCustomWindowInfo
 {
 	HWND		pWindowHandle;
@@ -57,6 +65,8 @@ BOOL WINAPI destroy_clipboard_viewer() noexcept;
 LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 BOOL WINAPI get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info) noexcept;
+
+BOOL WINAPI get_clipboard_owner_info_ex(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info, MAINWINDOWPROC * main_window_proc) noexcept;
 
 BOOL CALLBACK clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept;
 

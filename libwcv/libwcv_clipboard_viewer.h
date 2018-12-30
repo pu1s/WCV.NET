@@ -18,12 +18,8 @@ namespace libwcv
 	public ref class ClipboardViewer
 	{
 	public:
-		ClipboardViewer()
-		{
-			_clipboardViewerForm = gcnew Win32CVF();
-			//DIAG_OUT(_clipboardViewerForm->Handle.ToString());
-			OnCreate();
-		}
+		ClipboardViewer();
+		~ClipboardViewer();
 	private:
 		ref class Win32CVF
 			: public System::Windows::Forms::Form
@@ -98,18 +94,34 @@ namespace libwcv
 			}
 		}
 		
+		// Show Clipboard Viewer
 		void ShowViewer();
+
+		// Hide Clipboard Viewer
 		void HideViewer();
+
+		// Clipboard Viewer String Representation
 		System::String^ ToString() override;
 	public:
+
+		// Event on create Clipboard Viewer Form
 		static event System::EventHandler^ Create;
+
+		// Event on show Clipboard Viewer Form
+		event System::EventHandler^ Shown;
+
 	protected:
+		// Event on create Clipboard Viewer Form
 		static void OnCreate()
 		{
 			Create(nullptr, gcnew System::EventArgs());
 		}
-		
-		
+
+		// Event on show Clipboard Viewer Form
+		void OnShow()
+		{
+			Shown(this, gcnew System::EventArgs());
+		}
 	protected:
 		
 	};

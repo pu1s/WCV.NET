@@ -18,11 +18,17 @@ inline void libwcv::ClipboardViewer::Win32CVF::WndProc(System::Windows::Forms::M
 			"\n" + _Win32CVF_lastError.ToString());
 		break;
 	case WM_DRAWCLIPBOARD:
+		//
 
+		//
 		if (IsWindow(libwcv::interop::clr_cast<HWND>(_Win32CVF_nextClipboardViewer)) || _Win32CVF_nextClipboardViewer!= System::IntPtr::Zero)
 		{
 			PostMessage(libwcv::interop::clr_cast<HWND>(_Win32CVF_nextClipboardViewer), m.message, m.wParam, m.lParam);
 		}
+		break;
+	case WM_DESTROY:
+		ChangeClipboardChain(libwcv::interop::clr_cast<HWND>(this->Handle), libwcv::interop::clr_cast<HWND>(_Win32CVF_nextClipboardViewer));
+		DIAG_OUT("Destroy Window");
 		break;
 	default:
 		DefWndProc(msg);
@@ -57,11 +63,24 @@ System::Int32 libwcv::ClipboardViewer::Win32CVF::_Win32CVF_set_clipboard_viewer(
 	return return_value;
 }
 
+libwcv::ClipboardViewer::ClipboardViewer()
+{
+	_clipboardViewerForm = gcnew Win32CVF();
+	//DIAG_OUT(_clipboardViewerForm->Handle.ToString());
+	OnCreate();
+}
+
+libwcv::ClipboardViewer::~ClipboardViewer()
+{
+	delete _clipboardViewerForm;
+}
+
 void libwcv::ClipboardViewer::ShowViewer()
 {
 	if (_clipboardViewerForm->Handle != System::IntPtr::Zero)
 	{
 		_clipboardViewerForm->Show();
+		OnShow();
 	}
 }
 

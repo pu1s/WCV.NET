@@ -10,6 +10,9 @@ int main()
 {
 	
     std::cout << "Hello World!\n"; 
+	MAINWINDOWPROC mwin;
+	CLIPBOARDOWNERINFOSTRUCT owner;
+	get_clipboard_owner_info_ex(&owner, &mwin);
 	create_clipboard_viewer(L" ", L" ", L" ", NULL);
 	
 	system("pause");

@@ -96,8 +96,9 @@ LRESULT CALLBACK clipboard_viewer_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		wcout << L"Create Viewer" << endl;
 		break;
 	case WM_DRAWCLIPBOARD:
+		MessageBox(NULL, L"FFFF", NULL, NULL);
 		wcout << L"Clipboard Updated" << endl;
-		get_clipboard_owner_info(&ClipboardOwnerInfo);
+		//get_clipboard_owner_info(&ClipboardOwnerInfo);
 		//TODO: Основной код
 		if (nextClipboardViewer)
 		{
@@ -194,6 +195,21 @@ BOOL __stdcall get_clipboard_owner_info(CLIPBOARDOWNERINFOSTRUCT * clipboard_own
 	return 0;
 }
 
+BOOL __stdcall get_clipboard_owner_info_ex(CLIPBOARDOWNERINFOSTRUCT * clipboard_owner_info, MAINWINDOWPROC * main_window_proc) noexcept
+{
+	HWND clipboard_owner_window_;
+	HWND foreground_window_;
+	DWORD clippboard_owner_window_proc_id;
+	DWORD foreground_window_proc_id;
+
+	clipboard_owner_window_ = (HWND)GetClipboardOwner();
+	foreground_window_ = (HWND)GetForegroundWindow();
+
+	GetWindowThreadProcessId(clipboard_owner_window_, &clippboard_owner_window_proc_id);
+	GetWindowThreadProcessId(foreground_window_, &foreground_window_proc_id);
+	if (clippboard_owner_window_proc_id == foreground_window_proc_id) return TRUE;
+}
+
 BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 {
 	wchar_t buffer[MAX_PATH];
@@ -209,4 +225,9 @@ BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 		return FALSE;
 	}
 	return TRUE;
+}
+
+BOOL clipboard_viewer_enum_child_windows_proc(HWND hWnd, LPARAM lParam) noexcept
+{
+	return 0;
 }
