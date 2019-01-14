@@ -14,7 +14,7 @@ int main()
 	CLIPBOARDOWNERINFOSTRUCT owner;
 	get_clipboard_owner_info_ex(&owner, &mwin);
 	create_clipboard_viewer(L" ", L" ", L" ", NULL);
-	
+	clipboard_viewer_main_proc();
 	system("pause");
 }
 

@@ -23,14 +23,14 @@ namespace wcv
             cv.Shown += Cv_Shown;
         }
 
-        private void Cv_Shown(object sender, EventArgs e)
+        private void Cv_Shown(object sender, AEventArgs e)
         {
-            this.Text = "Form Shown";
+            this.Text = e.obj.ToString();
         }
 
         private void CvOnCreate(object sender, EventArgs e)
         {
-            //MessageBox.Show("Created yes");
+            richTextBox1.Text += "Window Create!!!";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace wcv
         private void button1_Click(object sender, EventArgs e)
         {
 
-            cv.ShowViewer();
+            //cv.ShowViewer();
             richTextBox1.Text = cv.ToString();
         }
 

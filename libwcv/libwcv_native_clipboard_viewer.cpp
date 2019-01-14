@@ -63,16 +63,11 @@ HWND __stdcall create_clipboard_viewer(LPCWSTR class_name, LPCWSTR window_name, 
 #ifdef _DEBUG
 	ShowWindow(clipboardViewer, SW_SHOW);
 #else
-	ShowWindow(cvhwnd, NULL);
+	ShowWindow(clipboardViewer, NULL);
 #endif // _DEBUG
 	UpdateWindow(clipboardViewer);
 
-	// Step 3: The Message Loop
-	while (GetMessage(&msg, NULL, 0, 0) > 0)
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+	
 	return clipboardViewer;
 }
 
@@ -230,4 +225,15 @@ BOOL clipboard_viewer_enum_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 BOOL clipboard_viewer_enum_child_windows_proc(HWND hWnd, LPARAM lParam) noexcept
 {
 	return 0;
+}
+
+VOID __stdcall clipboard_viewer_main_proc(VOID) noexcept
+{
+	// Step 3: The Message Loop
+	MSG message;
+	while (GetMessage(&message, NULL, 0, 0) > 0)
+	{
+		TranslateMessage(&message);
+		DispatchMessage(&message);
+	}
 }
