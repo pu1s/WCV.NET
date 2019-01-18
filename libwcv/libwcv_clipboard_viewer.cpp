@@ -130,8 +130,5 @@ HWND std::GetProcMainWindow(HWND hWnd) noexcept
 		return NULL;
 }
 
-HWND std::GetProcMainWindow(LPDWORD pid) noexcept
-{
-	return HWND();
-}
+
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <WinUser.h>
 #include "libwcv_type_converter.h"
 
 
@@ -33,13 +34,12 @@ namespace std
 	Возвращает дескриптор "Главного" окна процесса.
 	Функция возвращает NULL, если не найдено окно в данном процессе
 	*/
-	HWND WINAPI GetProcMainWindow(
-		LPDWORD pid // Дескриптор процесса
-	) noexcept;
+	//HWND WINAPI GetProcMainWindow(
+	//	LPDWORD pid // Дескриптор процесса
+	//) noexcept;
 }
 namespace libwcv
 {
-
 	public ref class AEventArgs : public System::EventArgs
 	{
 	public:
@@ -89,6 +89,7 @@ namespace libwcv
 				return this->_clipboardViewerForm->ClipboardViewerForm_get_is_enabled();
 			}
 		}
+
 		property
 			System::IntPtr ClipboardViewerHandle
 		{
@@ -169,5 +170,11 @@ namespace libwcv
 		System::String^		ClipboardOwnerProcessName;
 		System::Int32		ClipboardOwnerProcessID;
 		System::String^		ClipboardOwnerModuleName;
+	};
+
+	struct MyStruct
+	{
+		WNDCLASSEX wcex;
+		
 	};
 }
