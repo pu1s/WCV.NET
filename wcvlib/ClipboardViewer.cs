@@ -82,14 +82,13 @@ namespace wcvlib
     public class ClipboardViewer
     {
         private ClipboardViewerForm viewerForm;
-        private string viewerFormCaption;
 
         public ClipboardViewerForm ViewerForm { get => viewerForm; private set => viewerForm = value; }
-        public string ViewerFormCaption { get => viewerFormCaption; }
+        public string ViewerFormCaption { get; }
 
         public ClipboardViewer(string viewerFormCaption_)
         {
-            viewerFormCaption = viewerFormCaption_;
+            ViewerFormCaption = viewerFormCaption_;
         }
     }
 }
