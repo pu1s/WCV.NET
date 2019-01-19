@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wcvlib;
 
 namespace wpfcv
 {
@@ -24,11 +25,20 @@ namespace wpfcv
         public MainWindow()
         {
             InitializeComponent();
-            clipboardViewer = new WFormsClipboardViewer();
+            ClipboardViewerForm.ClipboardViewerCreated += ClipboardViewer_ClipboardViewerCreated;
+            clipboardViewer = new ClipboardViewerForm();
+           
         }
-        private WFormsClipboardViewer clipboardViewer;
+
+        private void ClipboardViewer_ClipboardViewerCreated(object sender, EventArgs e)
+        {
+            btn1.Content = "CV Created";
+        }
+
+        private ClipboardViewerForm clipboardViewer;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             btn1.Content = clipboardViewer.ToString();
         }
     }
