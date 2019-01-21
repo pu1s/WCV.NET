@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wcv", "wcv\wcv.csproj", "{1C14DD61-4D59-4D47-AC41-BB54A8924300}"
 EndProject
@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cv", "cv\cv.vcxproj", "{344
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpfcv", "wpfcv\wpfcv.csproj", "{83989A4F-7CEB-4515-8AD2-CA386824264E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wcvlib", "wcvlib\wcvlib.csproj", "{E769C220-BFE0-4B88-A737-AE0D7F10E041}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wcvlib.net", "wcvlib\wcvlib.net.csproj", "{E769C220-BFE0-4B88-A737-AE0D7F10E041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

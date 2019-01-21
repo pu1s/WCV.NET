@@ -32,15 +32,13 @@ namespace wcvlib
         {
             this.Visible = true;
         }
-        private IntPtr _clipboardViewerHandle;
         private IntPtr _nextClipboardViewerHandle;
 
-        public IntPtr ClipboardViewerHandle { get => _clipboardViewerHandle; private set => _clipboardViewerHandle = value; }
         public IntPtr NextClipboardViewerHandle { get => _nextClipboardViewerHandle; private set => _nextClipboardViewerHandle = value; }
 
         public override string ToString()
         {
-            return IntPtr.Zero != _clipboardViewerHandle ? "ClipboardViewerObject: " + _clipboardViewerHandle.ToString() : "ClipboardViewerObject: NULL";
+            return  this.Handle != IntPtr.Zero ? "ClipboardViewerObject: " + this.Handle.ToString() : "ClipboardViewerObject: NULL";
         }
         protected override void WndProc(ref Message m)
         {

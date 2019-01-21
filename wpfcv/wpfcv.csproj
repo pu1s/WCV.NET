@@ -96,9 +96,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\wcvlib\wcvlib.csproj">
+    <ProjectReference Include="..\wcvlib\wcvlib.net.csproj">
       <Project>{e769c220-bfe0-4b88-a737-ae0d7f10e041}</Project>
-      <Name>wcvlib</Name>
+      <Name>wcvlib.net</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

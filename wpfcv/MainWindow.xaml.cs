@@ -38,8 +38,10 @@ namespace wpfcv
         private ClipboardViewerForm clipboardViewer;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            btn1.Content = clipboardViewer.ToString();
+
+            btn1.Content = clipboardViewer.Handle.ToString();
+            btn1.Content += ":";
+            btn1.Content += clipboardViewer.NextClipboardViewerHandle.ToString();
         }
     }
 }
