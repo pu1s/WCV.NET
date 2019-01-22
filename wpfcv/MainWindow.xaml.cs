@@ -22,12 +22,12 @@ namespace wpfcv
     public partial class MainWindow : Window
     {
         private ClipboardViewer clipboardViewer = null;
-        public MainWindow()
+        public  MainWindow()
         {
             InitializeComponent();
             //ClipboardViewerForm.ClipboardViewerCreated += ClipboardViewer_ClipboardViewerCreated;
             clipboardViewer = new ClipboardViewer();
-            clipboardViewer.Init();
+           
            
         }
 
@@ -37,9 +37,9 @@ namespace wpfcv
         //}
 
         //private ClipboardViewerForm clipboardViewer;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (await clipboardViewer.InitAsync()) ;
             //btn1.Content = clipboardViewer.Handle.ToString();
             //btn1.Content += ":";
             //btn1.Content += clipboardViewer.NextClipboardViewerHandle.ToString();

@@ -24,7 +24,7 @@ namespace wcvlib
             _clipboardViewerForm = null;
         }
 
-       
+
 
         private class ClipboardViewerForm : System.Windows.Forms.Form
         {
@@ -96,9 +96,15 @@ namespace wcvlib
                 return null;
             }
         }
-        // TODO: переобдумать
-        public Task<bool> InitAsync()
+        public ClipboardViewer InitInstanceAsync()
         {
+            // TODO: переобдумать
+            return this;
+        }
+        // TODO: переобдумать
+        public async Task<bool> InitAsync()
+        {
+            
             _clipboardViewerForm = new ClipboardViewerForm
             {
                 Visible = true
@@ -107,11 +113,11 @@ namespace wcvlib
             if (_clipboardViewerForm.Handle != IntPtr.Zero)
             {
                 OnClipboardViewerEnabled();
-                return Task.FromResult<bool>(true);
+                return Task.FromResult<bool>(true).GetAwaiter().GetResult();
             }
             else
             {
-                return null;
+                return Task.FromResult<bool>(false).GetAwaiter().GetResult();
             }
         }
         public static bool IsEnabled { get => _isEnabled; private set => _isEnabled = value; }
