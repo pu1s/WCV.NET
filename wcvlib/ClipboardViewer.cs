@@ -17,7 +17,7 @@ namespace wcvlib
     public class ClipboardViewer
     {
         public delegate ClipboardViewer ini();
-        public delegate void ClipboardViewerEnabled();
+        public delegate void EnableService();
 
         public ClipboardViewer()
         {
@@ -65,8 +65,8 @@ namespace wcvlib
         }
         private static bool _isEnabled;
         private ClipboardViewerForm _clipboardViewerForm;
-        public static event ClipboardViewerEnabled ClipboardViewerEnable;
-        public static event ClipboardViewerEnabled ClipboardViewerDisable;
+        public static event EnableService ClipboardViewerEnable;
+        public static event EnableService ClipboardViewerDisable;
         protected static void OnClipboardViewerEnabled()
         {
             _isEnabled = true;
