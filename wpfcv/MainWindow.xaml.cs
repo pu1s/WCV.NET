@@ -21,27 +21,28 @@ namespace wpfcv
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private ClipboardViewer clipboardViewer = null;
         public MainWindow()
         {
             InitializeComponent();
-            ClipboardViewerForm.ClipboardViewerCreated += ClipboardViewer_ClipboardViewerCreated;
-            clipboardViewer = new ClipboardViewerForm();
+            //ClipboardViewerForm.ClipboardViewerCreated += ClipboardViewer_ClipboardViewerCreated;
+            clipboardViewer = new ClipboardViewer();
+            clipboardViewer.Init();
            
         }
 
-        private void ClipboardViewer_ClipboardViewerCreated(object sender, EventArgs e)
-        {
-            btn1.Content = "CV Created";
-        }
+        //private void ClipboardViewer_ClipboardViewerCreated(object sender, EventArgs e)
+        //{
+        //    btn1.Content = "CV Created";
+        //}
 
-        private ClipboardViewerForm clipboardViewer;
+        //private ClipboardViewerForm clipboardViewer;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            btn1.Content = clipboardViewer.Handle.ToString();
-            btn1.Content += ":";
-            btn1.Content += clipboardViewer.NextClipboardViewerHandle.ToString();
+            //btn1.Content = clipboardViewer.Handle.ToString();
+            //btn1.Content += ":";
+            //btn1.Content += clipboardViewer.NextClipboardViewerHandle.ToString();
         }
     }
 }
