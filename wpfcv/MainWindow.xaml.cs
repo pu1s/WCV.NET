@@ -39,7 +39,7 @@ namespace wpfcv
         //private ClipboardViewerForm clipboardViewer;
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (await clipboardViewer.InitAsync()) ;
+           await clipboardViewer.InitAsync() ;
             //btn1.Content = clipboardViewer.Handle.ToString();
             //btn1.Content += ":";
             //btn1.Content += clipboardViewer.NextClipboardViewerHandle.ToString();

@@ -102,23 +102,10 @@ namespace wcvlib
             return this;
         }
         // TODO: переобдумать
-        public async Task<bool> InitAsync()
+        public async Task<ClipboardViewer> InitAsync()
         {
-            
-            _clipboardViewerForm = new ClipboardViewerForm
-            {
-                Visible = true
-            };
-            _clipboardViewerForm.CreateControl();
-            if (_clipboardViewerForm.Handle != IntPtr.Zero)
-            {
-                OnClipboardViewerEnabled();
-                return Task.FromResult<bool>(true).GetAwaiter().GetResult();
-            }
-            else
-            {
-                return Task.FromResult<bool>(false).GetAwaiter().GetResult();
-            }
+            Func<ClipboardViewer> func = new Func<ClipboardViewer>(Init);
+            return func.Invoke();
         }
         public static bool IsEnabled { get => _isEnabled; private set => _isEnabled = value; }
     }
